@@ -1,0 +1,30 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Connect MetaMask</title>
+  <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+</head>
+<body>
+  <button id="connectButton">Connect Wallet</button>
+  <p id="walletAddress"></p>
+
+  <script>
+    const connectButton = document.getElementById('connectButton');
+    const walletAddress = document.getElementById('walletAddress');
+
+    connectButton.addEventListener('click', async () => {
+      if (window.ethereum) {
+        try {
+          const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+          walletAddress.textContent = `Connected: ${accounts[0]}`;
+        } catch (error) {
+          console.error('User rejected the request.');
+        }
+      } else {
+        alert('MetaMask is not installed. Please install it to use this feature.');
+      }
+    });
+  </script>
+</body>
+</html>
